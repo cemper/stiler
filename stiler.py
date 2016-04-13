@@ -164,11 +164,18 @@ def get_max_all(wincount):
 
 
 def move_active(PosX,PosY,Width,Height):
+    command = ("wmctrl -r :ACTIVE: -b remove,"
+        "maximized_vert,maximized_horz,fullscreen")
+    os.system(command)
     command =  " wmctrl -r :ACTIVE: -e 0," + str(PosX) + "," + str(PosY)+ "," + str(Width) + "," + str(Height)
     os.system(command)
 
 
 def move_window(windowid,PosX,PosY,Width,Height):
+    command = ("wmctrl -r "
+        + windowid
+        + " -b remove,maximized_vert,maximized_horz,fullscreen")
+    os.system(command)
     command =  " wmctrl -i -r " + windowid +  " -e 0," + str(PosX) + "," + str(PosY)+ "," + str(Width) + "," + str(Height)
     os.system(command)
     command = "wmctrl -i -r " + windowid + " -b remove,hidden,shaded"
